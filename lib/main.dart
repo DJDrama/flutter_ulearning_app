@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/pages/welcome/bloc/welcome_blocs.dart';
+import 'package:ulearning_app/pages/welcome/welcome.dart';
 
 import 'app_blocs.dart';
 import 'app_events.dart';
@@ -15,16 +18,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => AppBlocs(),
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const MyHomePage(),
-        ));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => WelcomeBloc()),
+          BlocProvider(create: (context) => AppBlocs()),
+        ],
+        child: ScreenUtilInit(
+            builder: (context, child) => MaterialApp(
+                  title: 'Flutter Demo',
+                  theme: ThemeData(
+                    colorScheme:
+                        ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                    useMaterial3: true,
+                  ),
+                  home: const Welcome(),
+                )));
   }
 }
 
@@ -40,7 +48,7 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: BlocBuilder<AppBlocs, AppStates>(
-          builder: (context, state){
+          builder: (context, state) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -60,12 +68,16 @@ class MyHomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FloatingActionButton(
-            onPressed: ()=>BlocProvider.of<AppBlocs>(context).add(Increment()),
+            onPressed: () =>
+                BlocProvider.of<AppBlocs>(context).add(Increment()),
             tooltip: 'Increment',
+            heroTag: "heroTag1",
             child: const Icon(Icons.add),
           ),
           FloatingActionButton(
-            onPressed: ()=>BlocProvider.of<AppBlocs>(context).add(Decrement()),
+            heroTag: "heroTag2",
+            onPressed: () =>
+                BlocProvider.of<AppBlocs>(context).add(Decrement()),
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
@@ -74,4 +86,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
