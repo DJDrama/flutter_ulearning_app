@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulearning_app/main.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_events.dart';
 
 import 'bloc/welcome_blocs.dart';
@@ -24,7 +23,7 @@ class _WelcomeState extends State<Welcome> {
         color: Colors.white,
         child: Scaffold(
           body:
-          BlocBuilder<WelcomeBloc, WelcomeState>(builder: (context, state) {
+              BlocBuilder<WelcomeBloc, WelcomeState>(builder: (context, state) {
             return Container(
                 margin: EdgeInsets.only(top: 34.h),
                 // width: 345.w,
@@ -87,17 +86,18 @@ class _WelcomeState extends State<Welcome> {
       String subTitle, String imagePath) {
     return Column(
       children: [
-        SizedBox(width: 345.w,
+        SizedBox(
+            width: 345.w,
             height: 345.w,
             child: Image.asset(imagePath, fit: BoxFit.cover)),
         Container(
             child: Text(
-              title,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.normal),
-            )),
+          title,
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: 24.sp,
+              fontWeight: FontWeight.normal),
+        )),
         Container(
             width: 375.w,
             padding: EdgeInsets.only(left: 30.w, right: 30.w),
@@ -111,12 +111,14 @@ class _WelcomeState extends State<Welcome> {
         GestureDetector(
           onTap: () {
             if (index < 3) {
-              pageController.animateToPage(
-                  index, duration: const Duration(milliseconds: 500),
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeIn);
             } else {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const MyHomePage()));
+              /*Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const MyHomePage()));*/
+              Navigator.of(context).pushNamedAndRemoveUntil("signIn",
+                      (route) => false);
             }
           },
           child: Container(
