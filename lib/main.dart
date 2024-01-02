@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning_app/pages/welcome/welcome.dart';
 
@@ -21,10 +22,13 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => WelcomeBloc()),
-          BlocProvider(create: (context) => AppBlocs()),
+          BlocProvider(
+              //lazy:false,
+              create: (context) => AppBlocs()),
         ],
         child: ScreenUtilInit(
             builder: (context, child) => MaterialApp(
+                  debugShowCheckedModeBanner: false,
                   title: 'Flutter Demo',
                   theme: ThemeData(
                     colorScheme:
@@ -32,6 +36,10 @@ class MyApp extends StatelessWidget {
                     useMaterial3: true,
                   ),
                   home: const Welcome(),
+                  routes: {
+                    "myHomePage": (context) => const MyHomePage(),
+                    "signIn": (context) => const SignIn(),
+                  },
                 )));
   }
 }
