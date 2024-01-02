@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/pages/sign_in/bloc/signin_blocs.dart';
+import 'package:ulearning_app/pages/sign_in/bloc/signin_events.dart';
+import 'package:ulearning_app/pages/sign_in/bloc/signin_states.dart';
 import 'package:ulearning_app/pages/sign_in/widgets/sign_in_widget.dart';
 
 class SignIn extends StatefulWidget {
@@ -13,38 +17,56 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-          child: Scaffold(
-              backgroundColor: Colors.white,
-              appBar: buildAppBar(),
-              body: SingleChildScrollView(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildThirdPartyLogIn(context),
-                  Center(child: reusableText("Or use your email account to login")),
-                  Container(
-                    margin: EdgeInsets.only(top: 66.h),
-                    padding: EdgeInsets.symmetric(horizontal: 25.w),
+    return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+      return Container(
+        color: Colors.white,
+        child: SafeArea(
+            child: Scaffold(
+                backgroundColor: Colors.white,
+                appBar: buildAppBar(),
+                body: SingleChildScrollView(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        reusableText("Email"),
-                        SizedBox(height: 5.h,),
-                        buildTextField("Enter your email address", "email", "user"),
-                        reusableText("Password"),
-                        SizedBox(height: 5.h,),
-                        buildTextField("Enter your password", "password", "lock"),
-                      ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildThirdPartyLogIn(context),
+                    Center(
+                        child:
+                            reusableText("Or use your email account to login")),
+                    Container(
+                      margin: EdgeInsets.only(top: 32.h),
+                      padding: EdgeInsets.symmetric(horizontal: 25.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          reusableText("Email"),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          buildTextField(
+                              "Enter your email address", "email", "user",
+                              (value) {
+                            context.read<SignInBloc>().add(EmailEvent(value));
+                          }),
+                          reusableText("Password"),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          buildTextField(
+                              "Enter your password", "password", "lock",
+                              (value) {
+                            context
+                                .read<SignInBloc>()
+                                .add(PasswordEvent(value));
+                          }),
+                        ],
+                      ),
                     ),
-                  ),
-                  forgotPassword(),
-                  buildLogInAndRegisterButton("Log in", "login"),
-                  buildLogInAndRegisterButton("Sign up", "register"),
-                ],
-              )))),
-    );
+                    forgotPassword(),
+                    buildLogInAndRegisterButton("Log in", "login"),
+                    buildLogInAndRegisterButton("Sign up", "register"),
+                  ],
+                )))),
+      );
+    });
   }
 }

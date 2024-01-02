@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_events.dart';
 
 import 'bloc/welcome_blocs.dart';
@@ -69,8 +70,8 @@ class _WelcomeState extends State<Welcome> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           position: state.page,
                           decorator: DotsDecorator(
-                              color: Colors.grey,
-                              activeColor: Colors.blue,
+                              color: AppColors.primaryThirdElementText,
+                              activeColor: AppColors.primaryText,
                               size: const Size.square(8.5),
                               activeSize: const Size(18.0, 8.0),
                               activeShape: RoundedRectangleBorder(
@@ -90,21 +91,20 @@ class _WelcomeState extends State<Welcome> {
             width: 345.w,
             height: 345.w,
             child: Image.asset(imagePath, fit: BoxFit.cover)),
-        Container(
-            child: Text(
+        Text(
           title,
           style: TextStyle(
-              color: Colors.black,
+              color: AppColors.primaryText,
               fontSize: 24.sp,
               fontWeight: FontWeight.normal),
-        )),
+        ),
         Container(
             width: 375.w,
             padding: EdgeInsets.only(left: 30.w, right: 30.w),
             child: Text(
               subTitle,
               style: TextStyle(
-                  color: Colors.black.withOpacity(0.5),
+                  color: AppColors.primarySecondaryElementText,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.normal),
             )),
@@ -117,8 +117,8 @@ class _WelcomeState extends State<Welcome> {
             } else {
               /*Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const MyHomePage()));*/
-              Navigator.of(context).pushNamedAndRemoveUntil("signIn",
-                      (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("signIn", (route) => false);
             }
           },
           child: Container(
@@ -127,7 +127,7 @@ class _WelcomeState extends State<Welcome> {
             height: 50.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(15.w)),
-                color: Colors.blue,
+                color: AppColors.primaryElement,
                 boxShadow: [
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.1),
