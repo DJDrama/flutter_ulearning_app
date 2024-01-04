@@ -4,16 +4,21 @@ import 'package:ulearning_app/pages/sign_in/bloc/signin_states.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc() : super(SignInState()) {
-    on<EmailEvent>(_emailEvent);
+    on<EmailEvent>((event, emit) {
+    //  print("Email: ${event.email}");
+      emit(state.copyWith(email: event.email));
+    });
 
-    on<PasswordEvent>(_passwordEvent);
+    on<PasswordEvent>((event, emit) {
+      emit(state.copyWith(password: event.password));
+    });
   }
 
-  void _emailEvent(EmailEvent event, Emitter<SignInState> emitter) {
+/*  void _emailEvent(EmailEvent event, Emitter<SignInState> emitter) {
     emit(state.copyWith(email: event.email));
   }
 
   void _passwordEvent(PasswordEvent event, Emitter<SignInState> emitter) {
-    emit(state.copyWith(email: event.password));
-  }
+          emit(state.copyWith(password: event.password));
+  }*/
 }
