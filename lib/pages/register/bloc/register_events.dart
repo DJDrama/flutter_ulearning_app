@@ -10,7 +10,6 @@ final class RegisterInputUserName extends RegisterEvent {
 
 final class RegisterInputEmail extends RegisterEvent {
   final String email;
-
   const RegisterInputEmail(this.email);
 }
 

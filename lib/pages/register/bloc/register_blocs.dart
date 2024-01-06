@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_app/pages/register/bloc/register_events.dart';
 import 'package:ulearning_app/pages/register/bloc/register_states.dart';
 
-class RegisterBlocs extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBlocs() : super(const RegisterState()) {
+class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
+  RegisterBloc() : super(const RegisterState()) {
     on<RegisterInputUserName>(_onRegisterInputUserName);
     on<RegisterInputEmail>(_registerInputEmail);
     on<RegisterInputPassword>(_registerInputPassword);
