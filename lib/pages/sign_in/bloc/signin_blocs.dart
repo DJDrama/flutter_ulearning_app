@@ -3,7 +3,7 @@ import 'package:ulearning_app/pages/sign_in/bloc/signin_events.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/signin_states.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc() : super(SignInState()) {
+  SignInBloc() : super(const SignInState()) {
     on<EmailEvent>((event, emit) {
     //  print("Email: ${event.email}");
       emit(state.copyWith(email: event.email));

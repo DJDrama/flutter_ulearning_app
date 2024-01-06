@@ -7,6 +7,7 @@ import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning_app/pages/welcome/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'common/values/colors.dart';
 import 'firebase_options.dart';
 
 import 'app_blocs.dart';
@@ -38,8 +39,12 @@ class MyApp extends StatelessWidget {
         child: ScreenUtilInit(
             builder: (context, child) => MaterialApp(
                   debugShowCheckedModeBanner: false,
-                  title: 'Flutter Demo',
+                  //title: 'Flutter Demo',
                   theme: ThemeData(
+                    appBarTheme: const AppBarTheme(
+                        iconTheme: IconThemeData(color: AppColors.primaryText),
+                        elevation: 0,
+                        backgroundColor: Colors.white),
                     colorScheme:
                         ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                     useMaterial3: true,
