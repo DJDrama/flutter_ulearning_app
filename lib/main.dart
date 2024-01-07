@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/bloc_providers.dart';
+import 'package:ulearning_app/pages/application/application_page.dart';
 import 'package:ulearning_app/pages/register/register.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/signin_blocs.dart';
 import 'package:ulearning_app/pages/sign_in/sign_in.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
                         ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                     useMaterial3: true,
                   ),
-                  home: const Welcome(),
+                  home: const ApplicationPage(),
                   routes: {
                     "signIn": (context) => const SignIn(),
                     "register": (context) => const Register(),
