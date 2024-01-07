@@ -17,16 +17,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   void _registerInputEmail(
       RegisterInputEmail event, Emitter<RegisterState> emit) {
-    emit(state.copyWith(userName: event.email));
+    emit(state.copyWith(email: event.email));
   }
 
   void _registerInputPassword(
       RegisterInputPassword event, Emitter<RegisterState> emit) {
-    emit(state.copyWith(userName: event.password));
+    emit(state.copyWith(password: event.password));
   }
 
   void _registerInputConfirmPassword(
       RegisterInputConfirmPassword event, Emitter<RegisterState> emit) {
-    emit(state.copyWith(userName: event.confirmPassword));
+    emit(state.copyWith(confirmPassword: event.confirmPassword));
   }
 }
