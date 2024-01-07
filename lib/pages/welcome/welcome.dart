@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_events.dart';
 
+import '../../common/routes/routes.dart';
 import 'bloc/welcome_blocs.dart';
 import 'bloc/welcome_states.dart';
 
@@ -118,7 +119,7 @@ class _WelcomeState extends State<Welcome> {
               /*Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const MyHomePage()));*/
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("signIn", (route) => false);
+                  .pushNamedAndRemoveUntil(AppRoutes.SIGN_IN, (route) => false);
             }
           },
           child: Container(

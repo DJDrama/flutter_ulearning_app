@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/routes/routes.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/signin_blocs.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/signin_events.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/signin_states.dart';
 import 'package:ulearning_app/pages/sign_in/signin_controller.dart';
-//import 'package:ulearning_app/pages/sign_in/widgets/sign_in_widget.dart';
 
 import '../common_widgets.dart';
 
@@ -68,7 +68,7 @@ class _SignInState extends State<SignIn> {
                       SignInController(context: context).handleSignIn("email");
                     }),
                     buildLogInAndRegisterButton("Sign up", "register", () {
-                      Navigator.of(context).pushNamed("register");
+                      Navigator.of(context).pushNamed(AppRoutes.REGISTER);
                     }),
                   ],
                 )))),
