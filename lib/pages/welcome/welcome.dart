@@ -6,6 +6,8 @@ import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_events.dart';
 
 import '../../common/routes/routes.dart';
+import '../../common/values/constant.dart';
+import '../../global.dart';
 import 'bloc/welcome_blocs.dart';
 import 'bloc/welcome_states.dart';
 
@@ -118,6 +120,8 @@ class _WelcomeState extends State<Welcome> {
             } else {
               /*Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const MyHomePage()));*/
+              Global.storageService
+                  .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
               Navigator.of(context)
                   .pushNamedAndRemoveUntil(AppRoutes.SIGN_IN, (route) => false);
             }
@@ -147,5 +151,4 @@ class _WelcomeState extends State<Welcome> {
       ],
     );
   }
-
 }
