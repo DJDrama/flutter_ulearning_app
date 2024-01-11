@@ -22,26 +22,11 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 20.h),
-              child: Text(
-                "Hello,",
-                style: TextStyle(
-                    color: AppColors.primaryThirdElementText,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 4.h),
-              child: Text(
-                "DJDrama",
-                style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-            )
+            homePageText("Hello,", color: AppColors.primaryThirdElementText),
+            homePageText("DJDrama", marginTop: 4),
+            SizedBox(height: 20.h,),
+            searchView(),
+            sliderView(),
           ],
         ),
       ),

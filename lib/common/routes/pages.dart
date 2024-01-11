@@ -63,10 +63,9 @@ class AppPages {
           }
           return MaterialPageRoute(
               builder: (_) => const SignIn(), settings: routeSettings);
-        } else {
-          return MaterialPageRoute(
-              builder: (_) => result.first.page, settings: routeSettings);
         }
+        return MaterialPageRoute(
+            builder: (_) => result.first.page, settings: routeSettings);
       }
     }
     print("Invalid route name : ${routeSettings.name}");

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [...AppPages.allBlocProviders(context)],
         child: ScreenUtilInit(
+            designSize: const Size(375, 812), // standard width
             builder: (context, child) => MaterialApp(
                   debugShowCheckedModeBanner: false,
                   //title: 'Flutter Demo',
