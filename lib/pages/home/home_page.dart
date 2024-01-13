@@ -24,19 +24,27 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           return Container(
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                homePageText("Hello,",
-                    color: AppColors.primaryThirdElementText),
-                homePageText("DJDrama", marginTop: 4),
-                SizedBox(
-                  height: 20.h,
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: homePageText("Hello,",
+                      color: AppColors.primaryThirdElementText),
                 ),
-                searchView(),
-                sliderView(context, state),
-                menuView()
+                SliverToBoxAdapter(
+                  child: homePageText("DJDrama", marginTop: 4),
+                ),
+                SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+                SliverToBoxAdapter(
+                  child: searchView(),
+                ),
+                SliverToBoxAdapter(
+                  child: sliderView(context, state),
+                ),
+                SliverToBoxAdapter(
+                  child: menuView(),
+                )
               ],
+              //crossAxisAlignment: CrossAxisAlignment.start,
             ),
           );
         },
