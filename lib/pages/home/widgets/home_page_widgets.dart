@@ -163,3 +163,73 @@ Widget _sliderPage({String imagePath = "assets/icons/art.png"}) {
 }
 
 // menu view for showing items
+Widget menuView() {
+  return Column(
+    children: [
+      Container(
+        width: 325.w,
+        margin: EdgeInsets.only(top: 15.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end, // align bottom
+          children: [
+            _reusableText("Choose your course!"),
+            GestureDetector(
+              child: _reusableText("See All",
+                  color: AppColors.primaryThirdElementText, fontSize: 10),
+            )
+          ],
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.only(top: 16.h),
+        child: Row(
+          children: [
+            _reusableMenuButton(
+              "All",
+              textColor: AppColors.primaryElementText,
+              backgroundColor: AppColors.primaryElement,
+            ),
+            _reusableMenuButton("Popular",
+                textColor: AppColors.primaryThirdElementText,
+                backgroundColor: Colors.white),
+            _reusableMenuButton(
+              "Newest",
+              textColor: AppColors.primaryThirdElementText,
+              backgroundColor: Colors.white,
+            ),
+          ],
+        ),
+      )
+    ],
+  );
+}
+
+Widget _reusableText(String text,
+    {Color color = AppColors.primaryText,
+    int fontSize = 16,
+    FontWeight fontWeight = FontWeight.bold}) {
+  return Text(text,
+      style: TextStyle(
+          color: color, fontWeight: fontWeight, fontSize: fontSize.sp));
+}
+
+// for menu buttons
+Widget _reusableMenuButton(
+  String title, {
+  Color textColor = AppColors.primaryElementText,
+  Color backgroundColor = AppColors.primaryElement,
+}) {
+  return GestureDetector(
+    child: Container(
+      margin: EdgeInsets.only(right: 20.w),
+      decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(8.w),
+          border: Border.all(color: backgroundColor)),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+      child: _reusableText(title,
+          color: textColor, fontSize: 11, fontWeight: FontWeight.normal),
+    ),
+  );
+}

@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 searchView(),
                 sliderView(context, state),
+                menuView()
               ],
             ),
           );
