@@ -42,7 +42,25 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SliverToBoxAdapter(
                   child: menuView(),
-                )
+                ),
+                SliverPadding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.h, horizontal: 0.w),
+                  sliver: SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 15),
+                    delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                      return Container(
+                        width: 100.w,
+                        height: 100.h,
+                        color: Colors.red,
+                      );
+                    }, childCount: 4),
+                  ),
+                ),
               ],
               //crossAxisAlignment: CrossAxisAlignment.start,
             ),
