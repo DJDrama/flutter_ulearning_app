@@ -1,6 +1,11 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_event.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_state.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -108,7 +113,7 @@ Widget searchView() {
   );
 }
 
-Widget sliderView() {
+Widget sliderView(BuildContext context, HomePageState state) {
   return Column(
     children: [
       Container(
@@ -116,12 +121,28 @@ Widget sliderView() {
           width: 325.w,
           height: 160.h,
           child: PageView(
+            onPageChanged: (value) {
+              context.read<HomePageBloc>().add(HomePagePageSwipe(value));
+            },
             children: [
               _sliderPage(imagePath: "assets/icons/art.png"),
               _sliderPage(imagePath: "assets/icons/Image_1.png"),
-              _sliderPage(imagePath: "assets/icons/Image_2.png"),
+              _sliderPage(imagePath: "assets/icons/Image_2.png")
             ],
           )),
+      Container(
+          child: DotsIndicator(
+        dotsCount: 3,
+        position: state.pageIndex,
+        decorator: DotsDecorator(
+            color: AppColors.primaryThirdElementText,
+            activeColor: AppColors.primaryElement,
+            size: const Size.square(5.0),
+            activeSize: const Size(17.0, 5.0),
+            activeShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            )),
+      ))
     ],
   );
 }
@@ -140,3 +161,5 @@ Widget _sliderPage({String imagePath = "assets/icons/art.png"}) {
     ),
   );
 }
+
+// menu view for showing items
