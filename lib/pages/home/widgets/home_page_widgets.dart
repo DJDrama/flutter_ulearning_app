@@ -233,3 +233,51 @@ Widget _reusableMenuButton(
     ),
   );
 }
+
+// course gridview ui
+Widget courseGrid(){
+  return  Container(
+    padding: EdgeInsets.all(12.w),
+    decoration: BoxDecoration(
+      image: const DecorationImage(
+          fit: BoxFit.fill,
+          image: AssetImage("assets/icons/Image_2.png")),
+      borderRadius: BorderRadius.circular(15.w),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      // from bottom
+      children: [
+        Text(
+          "Best course for IT and Engineering",
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          maxLines: 1,
+          style: TextStyle(
+            color: AppColors.primaryElementText,
+            fontWeight: FontWeight.bold,
+            fontSize: 11.sp,
+          ),
+        ),
+        SizedBox(
+          height: 4.h,
+        ),
+        Text(
+          "Flutter best course",
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          maxLines: 1,
+          style: TextStyle(
+            color: AppColors.primaryFourthElementText,
+            fontWeight: FontWeight.normal,
+            fontSize: 8.sp,
+          ),
+        )
+      ],
+    ),
+  );
+}
+
