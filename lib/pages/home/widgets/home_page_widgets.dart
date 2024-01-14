@@ -7,6 +7,8 @@ import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_event.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_state.dart';
 
+import '../../../common/widgets/base_text_widget.dart';
+
 AppBar buildAppBar() {
   return AppBar(
       title: Container(
@@ -173,9 +175,9 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end, // align bottom
           children: [
-            _reusableText("Choose your course!"),
+            reusableText("Choose your course!"),
             GestureDetector(
-              child: _reusableText("See All",
+              child: reusableText("See All",
                   color: AppColors.primaryThirdElementText, fontSize: 10),
             )
           ],
@@ -205,15 +207,6 @@ Widget menuView() {
   );
 }
 
-Widget _reusableText(String text,
-    {Color color = AppColors.primaryText,
-    int fontSize = 16,
-    FontWeight fontWeight = FontWeight.bold}) {
-  return Text(text,
-      style: TextStyle(
-          color: color, fontWeight: fontWeight, fontSize: fontSize.sp));
-}
-
 // for menu buttons
 Widget _reusableMenuButton(
   String title, {
@@ -228,20 +221,19 @@ Widget _reusableMenuButton(
           borderRadius: BorderRadius.circular(8.w),
           border: Border.all(color: backgroundColor)),
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
-      child: _reusableText(title,
+      child: reusableText(title,
           color: textColor, fontSize: 11, fontWeight: FontWeight.normal),
     ),
   );
 }
 
 // course gridview ui
-Widget courseGrid(){
-  return  Container(
+Widget courseGrid() {
+  return Container(
     padding: EdgeInsets.all(12.w),
     decoration: BoxDecoration(
       image: const DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage("assets/icons/Image_2.png")),
+          fit: BoxFit.fill, image: AssetImage("assets/icons/Image_2.png")),
       borderRadius: BorderRadius.circular(15.w),
     ),
     child: Column(
@@ -280,4 +272,3 @@ Widget courseGrid(){
     ),
   );
 }
-
