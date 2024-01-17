@@ -3,5 +3,7 @@ class AppConstants{
 
   static const String STORAGE_USER_PROFILE_KEY = "STORAGE_USER_PROFILE_KEY";
   static const String STORAGE_USER_TOKEN_KEY = "STORAGE_USER_TOKEN_KEY";
+
+  static const String SERVER_API_URL  = "http://127.0.0.1:8000/";
 }
 

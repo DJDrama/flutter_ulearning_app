@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ulearning_app/common/routes/names.dart';
-import 'package:ulearning_app/common/values/constant.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:ulearning_app/common/entities/entities.dart';
 import 'package:ulearning_app/common/widgets/flutter_toast.dart';
-import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/signin_blocs.dart';
+
+import '../../common/apis/user_api.dart';
+import '../../common/routes/names.dart';
+import '../../common/values/constant.dart';
+import '../../global.dart';
 
 class SignInController {
   final BuildContext context;
@@ -16,7 +22,9 @@ class SignInController {
     try {
       if (type == "email") {
         // BlockProvider.of<SignInBloc>(context).state; (same)
-        final state = context.read<SignInBloc>().state;
+        final state = context
+            .read<SignInBloc>()
+            .state;
         String emailAddress = state.email;
         String password = state.password;
 
@@ -31,7 +39,7 @@ class SignInController {
         try {
           final credential = await FirebaseAuth.instance
               .signInWithEmailAndPassword(
-                  email: emailAddress, password: password);
+              email: emailAddress, password: password);
           if (credential.user == null) {
             toastInfo(msg: "User does not exist!");
             return;
@@ -42,8 +50,22 @@ class SignInController {
           }
           var user = credential.user;
           if (user != null) {
+            String? displayName = user.displayName;
+            String? email = user.email;
+            String? id = user.uid;
+            String? photoUrl = user.photoURL;
+
+            LoginRequestEntity loginRequestEntity = LoginRequestEntity();
+            loginRequestEntity.avatar = photoUrl;
+            loginRequestEntity.name = displayName;
+            loginRequestEntity.email = email;
+            loginRequestEntity.open_id = id;
+            loginRequestEntity.type = 1; // 1 = email login
+
             print("user exist");
-            Global.storageService.setString(AppConstants.STORAGE_USER_TOKEN_KEY, user.uid);
+            //asyncPostAllData(loginRequestEntity);
+            Global.storageService
+                .setString(AppConstants.STORAGE_USER_TOKEN_KEY, id);
             Navigator.of(context).pushNamedAndRemoveUntil(
                 AppRoutes.APPLICATION, (route) => false);
           } else {
@@ -61,5 +83,28 @@ class SignInController {
         }
       }
     } catch (e) {}
+  }
+
+  Future<void> asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+    EasyLoading.show(
+        indicator: const CircularProgressIndicator(),
+        maskType: EasyLoadingMaskType.clear,
+        dismissOnTap: true);
+    try {
+      var result = await UserAPI.login(params: loginRequestEntity);
+      if(result.code == 200) {
+        Global.storageService.setString(AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+        Global.storageService
+            .setString(AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRoutes.APPLICATION, (route) => false);
+      }else{
+        toastInfo(msg: "Unknown error");
+      }
+    }catch(e) {
+      print("error ${e.toString()}");
+    }finally {
+      EasyLoading.dismiss();
+    }
   }
 }

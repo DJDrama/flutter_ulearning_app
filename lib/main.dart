@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'common/routes/routes.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
                     useMaterial3: true,
                   ),
                   onGenerateRoute: AppPages.generateRouteSettings,
+                  builder: EasyLoading.init(),
                 )));
   }
 }
